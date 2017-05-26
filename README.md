@@ -4,7 +4,8 @@ This is a integration/plug-in for using the DSPP dataset from Peptone Inc with K
 
 ## Installation
 
-```python setup.py
+```
+python setup.py
 ```
 
 ## Getting started
