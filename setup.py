@@ -1,9 +1,8 @@
 from setuptools import setup
 from setuptools import find_packages
 
-
 setup(name='DSPP-Keras',
-      version='0.0.1',
+      version='0.0.2',
       description='Integration of DSPP database with Keral Machine Learning Library',
       author='Jan Domanski',
       author_email='jan@peptone.io',
