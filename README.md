@@ -55,7 +55,7 @@ An annotated example of a convolutional neural network can be found in
 
 # Issues
 
-To report issues and improvement please email kamil@peptone.io, we're looking forward to your feedback!
+To report issues and improvement please email support@peptone.io, we're looking forward to your feedback!
 For issues specific to the dataset, please file an issue at https://github.com/PeptoneInc/dspp-data
 For issues with Keras integration, issues can be filed here https://github.com/PeptoneInc/dspp-data
 
