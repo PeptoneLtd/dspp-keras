@@ -1,6 +1,5 @@
 from ..utils.data_utils import get_file
-import numpy as np
-import cPickle as pickle
+import json
 import tarfile
 
 def load_data(path='peptone_dspp.tar.gz'):
@@ -19,7 +18,8 @@ def load_data(path='peptone_dspp.tar.gz'):
     for member in tar.getmembers():
          f = tar.extractfile(member)
          if f is None: continue
-         database = pickle.load(f)
+         #print("Load json {}".format(f))
+         database = json.load(f)
          break
 
     X, Y = database['X'], database['Y']
