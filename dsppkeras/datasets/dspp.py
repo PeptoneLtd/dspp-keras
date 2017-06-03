@@ -1,8 +1,9 @@
 from ..utils.data_utils import get_file
 import numpy as np
 import cPickle as pickle
+import tarfile
 
-def load_data(path='peptone_dspp.pkl'):
+def load_data(path='peptone_dspp.tar.gz'):
     """Loads the MNIST dataset.
 
     # Arguments
@@ -12,11 +13,15 @@ def load_data(path='peptone_dspp.pkl'):
     # Returns
         Tuple of Numpy arrays: `(x_train, y_train), (x_test, y_test)`.
     """
-    path = get_file(path, origin='https://github.com/PeptoneInc/dspp-data/blob/master/database.pkl?raw=true')
-    f = np.load(path)
+    path = get_file(path, origin='https://github.com/PeptoneInc/dspp-data/blob/master/database.tar.gz?raw=true')
+    tar = tarfile.open(path, "r:gz")
+    #print("Open archive at {}".format(path))
+    for member in tar.getmembers():
+         f = tar.extractfile(member)
+         if f is None: continue
+         database = pickle.load(f)
+         break
 
-    f =  open(path, 'rb')
-    database = pickle.load(f)
     X, Y = database['X'], database['Y']
     f.close()
     return (X, Y)
