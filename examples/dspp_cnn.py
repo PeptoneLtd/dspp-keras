@@ -50,31 +50,25 @@ def rmsd(y_true, y_pred):
     """
     return tf.sqrt(tf.reduce_mean(tf.pow(y_pred - y_true, 2)))
 
-def chi2(y_true, y_pred):
+
+def chi2(exp, obs):
     """
-        Compute the natural logarithm of CHI^2 statistics using output binning
+        Compute the log of CHI^2 statistics of non-zero expected elements
     """
-    # The number of bins, which regulates the resolution of the CHI2 test
-    nbins = 10
-    # Find the maximum in the true values tensor
-    MAX_true = tf.reduce_max(y_true)
-    MIN_true = tf.reduce_min(y_true)
-    # Compute the distributions of predicted and true value
-    H_pred = tf.histogram_fixed_width(y_pred, [MIN_true, MAX_true], nbins=nbins, dtype=tf.int32, name="y_pred_HIST")
-    H_true = tf.histogram_fixed_width(y_true, [MIN_true, MAX_true], nbins=nbins, dtype=tf.int32, name="y_true_HIST")
-    # Find and compare the max value in H_pred and H_true
-    LIMIT_TEST = tf.greater_equal(tf.reduce_max(H_pred),tf.reduce_max(H_true))
-    def A():
-        return tf.reduce_max(H_pred)
-    def B():
-        return tf.reduce_max(H_true)
-    # We will set the limit based on this value
-    LIMIT = tf.cond(LIMIT_TEST, lambda: A(), lambda: B())
-    # Avoid division by zero, by setting zero elements to 1e-8
-    Y_pred = tf.clip_by_value(tf.to_float(H_pred), 1.0e-8, tf.to_float(LIMIT))
-    Y_true = tf.clip_by_value(tf.to_float(H_true), 1.0e-8, tf.to_float(LIMIT))
-    # Pearson CHI^2 statistics
-    stat = tf.reduce_sum(tf.div(tf.pow(tf.subtract(Y_pred,Y_true), 2),Y_true),name="chi2_STAT")
+    zero = tf.constant(0, dtype=tf.float32)
+    mask = tf.not_equal(exp, zero)
+
+    def foo(tensor, mask):
+        return tf.boolean_mask(tensor, mask)
+
+    stat = tf.reduce_sum(
+        tf.div(
+            tf.pow(
+                tf.subtract(foo(obs, mask),foo(exp, mask)),
+            2),
+        foo(exp, mask)),
+    name="log_chi2_statistics")
+
     return tf.log(stat)
 
 class Struct:
