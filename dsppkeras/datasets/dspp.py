@@ -25,4 +25,5 @@ def load_data(path='peptone_dspp.tar.gz'):
 
     X, Y = database['X'], database['Y']
     f.close()
-    return [np.array(list(x)) for x in X], [np.array(y) for y in Y]
+    X, Y = map(lambda element: np.array(list(element)), X), map(lambda element: np.array(element), Y)
+    return X, Y
