@@ -1,4 +1,5 @@
 from ..utils.data_utils import get_file
+import numpy as np
 import json
 import tarfile
 
@@ -24,4 +25,4 @@ def load_data(path='peptone_dspp.tar.gz'):
 
     X, Y = database['X'], database['Y']
     f.close()
-    return (X, Y)
+    return [np.array(list(x)) for x in X], [np.array(y) for y in Y]

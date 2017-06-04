@@ -1,16 +1,12 @@
 from keras.models import model_from_json
-from dspp_cnn import parameters, normalize, pad
+from dspp_cnn import X, Y, weights
 from dsppkeras.datasets import dspp
 
-X, Y = dspp.load_data()
-X = pad(X, 20*parameters.N)
-Y = pad(normalize(Y), parameters.N)
-
 # load YAML and create model
-with open('model.json', 'r') as fp:
+with open('model/model.json', 'r') as fp:
     model = model_from_json(fp.read())
 # load weights into new model
-model.load_weights("model.h5")
+model.load_weights("model/model.h5")
 print("Loaded model from disk")
 
 prediction = model.predict(X[::100])
@@ -19,12 +15,13 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-fig = plt.figure(figsize=(4, prediction.shape[0]*3))
-for i, (exp, pred) in enumerate(zip(Y[::100], prediction)):
-    ax = fig.add_subplot(prediction.shape[0],1,i+1)
-    ax.plot(exp, label="exp")
-    ax.plot(pred, label="pred")
+fig = plt.figure(figsize=(9*3, 9*3))
+for i, (exp, w, pred) in enumerate(zip(Y[::100], weights[::100], prediction)):
+    ax = fig.add_subplot(9,9,i+1)
+    ax.plot(exp, label="ncSPC")
+    ax.plot(pred, label="predicion")
+    ax.plot(w, label="weights")
     ax.legend()
-    ax.set_xlim(0,200)
+    ax.set_xlim(0,250)
 fig.tight_layout()
-fig.savefig("plot.png")
+fig.savefig("model/plot.png")
