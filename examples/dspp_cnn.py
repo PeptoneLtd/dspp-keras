@@ -26,12 +26,12 @@ class lossRatio(Callback):
         print("R(l/v_l)={:2.2f} d(1-R)={:2.2f}".format(R, 1.0-R))
 
 def normalize(array):
-    concatenated = np.concatenate(Y)
+    concatenated = np.concatenate(array)
     mean, std = concatenated.mean(), concatenated.std()
     return [ (row - mean)/std for row in array ]
 
 def pad(array, N):
-    padded = [np.pad(row, (0, N-len(row)), 'constant') for row in Y]
+    padded = [np.pad(row, (0, N-len(row)), 'constant') for row in array]
     return np.vstack(padded)
 
 def shuffle_and_split(X, Y, seed=123456, fraction=0.8):
