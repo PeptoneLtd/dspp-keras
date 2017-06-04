@@ -3,10 +3,10 @@ from dspp_cnn import X, Y, weights
 from dsppkeras.datasets import dspp
 
 # load YAML and create model
-with open('model/model.json', 'r') as fp:
+with open('model.json', 'r') as fp:
     model = model_from_json(fp.read())
 # load weights into new model
-model.load_weights("model/model.h5")
+model.load_weights("model.h5")
 print("Loaded model from disk")
 
 prediction = model.predict(X[::100])
