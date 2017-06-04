@@ -15,12 +15,15 @@ print("Loaded model from disk")
 
 prediction = model.predict(X[::100])
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
 fig = plt.figure(figsize=(4, prediction.shape[0]*3))
-for i, (obs, exp) in enumerate(zip(Y[::100], prediction)):
+for i, (exp, pred) in enumerate(zip(Y[::100], prediction)):
     ax = fig.add_subplot(prediction.shape[0],1,i+1)
-    ax.plot(obs, label="obs")
     ax.plot(exp, label="exp")
+    ax.plot(pred, label="pred")
     ax.legend()
     ax.set_xlim(0,200)
 fig.tight_layout()
