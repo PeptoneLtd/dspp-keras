@@ -1,8 +1,8 @@
-'''Trains a simple convnet on the DSPP dataset.
+'''
+Trains a simple convnet on the dSPP (https://peptone.io/dssp) dataset.
 
-TODO expected accuracy after X epochs 'Gets to 99.25% test accuracy after 12 epochs'
-(there is still a lot of margin for parameter tuning).
-TODO performance '16 seconds per epoch on a GRID K520 GPU.'
+Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
+
 '''
 
 from __future__ import print_function
@@ -12,7 +12,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Reshape, Conv1D, MaxPooling1D, BatchNormalization, Activation, Dropout
 from keras.callbacks import Callback
-from keras.losses import mean_absolute_error
+from keras.losses import logcosh 
 from keras import backend as K
 import numpy as np
 import tensorflow as tf
@@ -23,7 +23,7 @@ class lossRatio(Callback):
     """
     def on_epoch_end(self, epoch, logs={}):
         R = logs.get('loss')/logs.get('val_loss')
-        print("R(l/v_l)={:2.2f} d(1-R)={:2.2f}".format(R, 1.0-R))
+        print(" R(l/v_l)={:2.2f}".format(R))
 
 def normalize(array):
     concatenated = np.concatenate(array)
@@ -53,7 +53,7 @@ def rmsd(y_true, y_pred):
 
 def chi2(exp, obs):
     """
-        Compute the log of CHI^2 statistics of non-zero expected elements
+        Compute CHI^2 statistics of non-zero expected elements
     """
     zero = tf.constant(0, dtype=tf.float32)
     mask = tf.not_equal(exp, zero)
@@ -69,7 +69,7 @@ def chi2(exp, obs):
         foo(exp, mask)),
     name="log_chi2_statistics")
 
-    return tf.log(stat)
+    return stat
 
 class Struct:
     def __init__(self, **entries):
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     epochs = 100
 
     model = get_model(parameters)
-    model.compile(optimizer=keras.optimizers.Adam(), loss=mean_absolute_error, metrics=[rmsd, chi2])
+    model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2])
 
     model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test), callbacks=[lossRatio()])
     score = model.evaluate(x_test, y_test)
