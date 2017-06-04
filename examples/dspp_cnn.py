@@ -124,23 +124,32 @@ args = {
 }
 parameters = Struct(**args)
 
-# Load, normalize
-# X is protein sequence, one-hot encoded
-# Y is the ncSPC score, raw between -1 and 1 (beta-sheet to aplpha-helix)
-X, Y = dspp.load_data()
-X = pad(X, 20*parameters.N)
-Y = pad(normalize(Y), parameters.N)
+if __name__ == '__main__':
 
-# Shuffle and split the data
-(x_train, y_train), (x_test, y_test) = shuffle_and_split(X, Y)
+    # Load, normalize
+    # X is protein sequence, one-hot encoded
+    # Y is the ncSPC score, raw between -1 and 1 (beta-sheet to aplpha-helix)
+    X, Y = dspp.load_data()
+    X = pad(X, 20*parameters.N)
+    Y = pad(normalize(Y), parameters.N)
 
-batch_size = 128
-epochs = 1
+    # Shuffle and split the data
+    (x_train, y_train), (x_test, y_test) = shuffle_and_split(X, Y)
 
-model = get_model(parameters)
-model.compile(optimizer=keras.optimizers.Adam(), loss=mean_absolute_error, metrics=[rmsd, chi2])
+    batch_size = 128
+    epochs = 100
 
-model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test), callbacks=[lossRatio()])
-score = model.evaluate(x_test, y_test)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+    model = get_model(parameters)
+    model.compile(optimizer=keras.optimizers.Adam(), loss=mean_absolute_error, metrics=[rmsd, chi2])
+
+    model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test), callbacks=[lossRatio()])
+    score = model.evaluate(x_test, y_test)
+    print('Test loss:', score[0])
+    print('Test accuracy:', score[1])
+
+    # serialize model to JSON
+    with open("model.json", "w") as fp:
+        fp.write(model.to_json())
+    # serialize weights to HDF5
+    model.save_weights("model.h5")
+    print("Saved model to disk")
