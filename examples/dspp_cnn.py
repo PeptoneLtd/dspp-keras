@@ -12,68 +12,13 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Reshape, Conv1D, MaxPooling1D, BatchNormalization, Activation, Dropout
 from keras.callbacks import Callback
-from keras.losses import logcosh 
+from keras.losses import logcosh
 from keras import backend as K
 import numpy as np
+import pandas as pd
 import tensorflow as tf
+from utils import *
 
-class lossRatio(Callback):
-    """
-        An extension of Callback class that logs the `loss`/`val_loss` ratio
-    """
-    def on_epoch_end(self, epoch, logs={}):
-        R = logs.get('loss')/logs.get('val_loss')
-        print(" R(l/v_l)={:2.2f}".format(R))
-
-def normalize(array):
-    concatenated = np.concatenate(array)
-    mean, std = concatenated.mean(), concatenated.std()
-    return [ (row - mean)/std for row in array ]
-
-def pad(array, N):
-    padded = [np.pad(row, (0, N-len(row)), 'constant') for row in array]
-    return np.vstack(padded)
-
-def shuffle_and_split(X, Y, seed=123456, fraction=0.8):
-    assert(X.shape[0]==Y.shape[0])
-    N = X.shape[0]
-    np.random.seed(seed)
-    indices = np.random.permutation(N)
-    idx = int(N*fraction)
-    training_idx, test_idx = indices[:idx], indices[idx:]
-    (x_train, y_train), (x_test, y_test) = (X[training_idx], Y[training_idx]), (X[test_idx], Y[test_idx])
-    return (x_train, y_train), (x_test, y_test)
-
-def rmsd(y_true, y_pred):
-    """
-        Compute the RMSD.
-    """
-    return tf.sqrt(tf.reduce_mean(tf.pow(y_pred - y_true, 2)))
-
-
-def chi2(exp, obs):
-    """
-        Compute CHI^2 statistics of non-zero expected elements
-    """
-    zero = tf.constant(0, dtype=tf.float32)
-    mask = tf.not_equal(exp, zero)
-
-    def foo(tensor, mask):
-        return tf.boolean_mask(tensor, mask)
-
-    stat = tf.reduce_sum(
-        tf.div(
-            tf.pow(
-                tf.subtract(foo(obs, mask),foo(exp, mask)),
-            2),
-        foo(exp, mask)),
-    name="log_chi2_statistics")
-
-    return stat
-
-class Struct:
-    def __init__(self, **entries):
-        self.__dict__.update(entries)
 
 def get_model(parameters):
 
@@ -103,43 +48,47 @@ def get_model(parameters):
 
     # Predictions
     model.add(Dense(parameters.N, name="Propensity"))
+    model.add(Reshape((parameters.N, 1), input_shape=(parameters.N,)))
+    print(model.summary())
 
     return model
 
 # all free parameters for the model
 args = {
     "N": 800,
-    "d1": 0.25,
+    "d1": 0.25, # never used
     "kernel1": 60,
-    "p1": 2,
+    "p1": 2, # never used
     "N1": 40,
     "ND1": 800,
     "d2": 0.5,
 }
 parameters = Struct(**args)
 
+X, Y = dspp.load_data()
+X, Y = handle_nan_distribution(X, Y)
+weights = generate_weights(Y, parameters)
+
+X = [lettercode2onehot(x) for x in X]
+X = pad(X, 20*parameters.N)
+Y = pad(Y, parameters.N)
+
 if __name__ == '__main__':
 
-    # Load, normalize
-    # X is protein sequence, one-hot encoded
-    # Y is the ncSPC score, raw between -1 and 1 (beta-sheet to aplpha-helix)
-    X, Y = dspp.load_data()
-    X = pad(X, 20*parameters.N)
-    Y = pad(normalize(Y), parameters.N)
-
     # Shuffle and split the data
-    (x_train, y_train), (x_test, y_test) = shuffle_and_split(X, Y)
+    (x_train, y_train, weights_train), (x_test, y_test, weights_test) = shuffle_and_split(X, Y, weights)
 
     batch_size = 128
-    epochs = 100
+    epochs = 1000
 
     model = get_model(parameters)
-    model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2])
+    model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2], sample_weight=weights_train, sample_weight_mode="temporal")
 
-    model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test), callbacks=[lossRatio()])
-    score = model.evaluate(x_test, y_test)
-    print('Test loss:', score[0])
-    print('Test accuracy:', score[1])
+    model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test, weights_test), callbacks=[lossRatio()])
+    score = model.evaluate(x_test, y_test, sample_weight=weights_test)
+    print()
+    print('Test rmsd:', score[0])
+    print('Test chi2:', score[1])
 
     # serialize model to JSON
     with open("model.json", "w") as fp:
