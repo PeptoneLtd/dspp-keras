@@ -9,5 +9,5 @@ setup(name='DSPP-Keras',
       url='https://github.com/PeptoneInc/dspp-keras',
       download_url='https://github.com/PeptoneInc/dspp-keras/archive/v0.0.3.tar.gz',
       license='MIT',
-      install_requires=['keras', 'numpy'],
+      install_requires=['keras', 'numpy', 'h5py'],
       packages=find_packages())
