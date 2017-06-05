@@ -55,11 +55,14 @@ An annotated example of a convolutional neural network can be found in
 
 # Issues
 
-To report issues and improvement please email support@peptone.io, we're looking forward to your feedback!
-For issues specific to the dataset, please file an issue at https://github.com/PeptoneInc/dspp-data
-For issues with Keras integration, issues can be filed here https://github.com/PeptoneInc/dspp-data
+We are always looking forward to improving `dspp` integration for Keras.
+Please file bug reports, issues or suggestions using https://github.com/PeptoneInc/dspp-keras/issues
+
+Should you have questions related to scientific and industrial implications of **dSPP**, please
+contact us at _support@peptone.io_.
+
 
 # Reference
-
-1. Link to bioArxiv TODO
-2. Link to frontend https://peptone.io/dspp
+`dspp-keras` is based on ongoing scientific research into protein stability and intrinsic disorder:
+1. Download and read the **original research paper** at http://biorxiv.org/content/early/2017/06/01/144840
+2. Search, browse and download complete **dSPP** database at https://peptone.io/dspp
