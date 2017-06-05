@@ -97,30 +97,3 @@ def chi2(exp, obs):
     name="chi2_statistics")
 
     return stat
-
-def handle_nan_distribution(X, Y):
-    df = pd.DataFrame({"Seq": np.concatenate([list(x) for x in X]), "ncSPC": np.concatenate(Y)})
-    df = df[df.ncSPC != 0.0]
-    distribution = {k: gr.ncSPC.values for k, gr in df.groupby("Seq")}
-
-    results = []
-    for x, y in zip(X, Y):
-        y = np.array(y)
-        mask = y == 0.0
-        y[mask] = [np.random.choice(distribution[letter]) for letter in x[mask]]
-        results.append((x,y))
-
-    return zip(*results)
-
-def handle_nan_remove(X, Y):
-    df = pd.DataFrame({"Seq": np.concatenate([list(x) for x in X]), "ncSPC": np.concatenate(Y)})
-    df = df[df.ncSPC != 0.0]
-    distribution = {k: gr.ncSPC.values for k, gr in df.groupby("Seq")}
-
-    results = []
-    for x, y in zip(X, Y):
-        y = np.array(y)
-        mask = y != 0.0
-        results.append((x[mask],y[mask]))
-
-    return zip(*results)
