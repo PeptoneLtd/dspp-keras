@@ -25,6 +25,7 @@ def get_model(parameters):
     # Reshaping
     model.add(Reshape((20, parameters.N), input_shape=(parameters.N*20,), name="Sequence"))
 
+    # 1D convolution block, inspired by audio-wave processing
     model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_1"))
     model.add(BatchNormalization())
     model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_2"))
@@ -66,9 +67,15 @@ parameters = Struct(**args)
 X, Y = dspp.load_data()
 weights = generate_weights(Y)
 
+# Perform one-hot encoding of protein sequences
 X = [lettercode2onehot(x) for x in X]
+
+# Make sure X,Y have the same dimension
 X = pad(X, 20*parameters.N)
 Y = pad(Y, parameters.N)
+
+# Make sure missing data points and extra
+# padding gets 0.0 weights
 weights = pad(weights, parameters.N)
 
 if __name__ == '__main__':
@@ -76,10 +83,17 @@ if __name__ == '__main__':
     # Shuffle and split the data
     (x_train, y_train, weights_train), (x_test, y_test, weights_test) = shuffle_and_split(X, Y, weights)
 
-    batch_size = 3072
-    epochs = 100
+    # We want to send the whole dSPP
+    # across our GPUs, hence the massive batch size
+    batch_size = 8000
+
+    # At least 1000 epochs are required to get ~0.2 RMSD
+    epochs = 5
+
+    # Our test system comprises 2 x NVIDIA TitanXP
     gpus = 2
 
+    # Initialize our model with user-supplied parameters
     model = get_model(parameters)
 
     # prepare the model for multi-GPU training

@@ -109,7 +109,15 @@ def make_parallel(model, gpu_count):
         A plain and naive multi-GPU implementation.
         Based on: https://github.com/kuza55/keras-extras/blob/master/utils/multi_gpu.py
     """
+
     def get_slice(data, idx, parts):
+
+        # This is a necessary work-around the issue related
+        # to serialization of multi-GPU model in Keras
+        # without tensorflow import declaration we won't
+        # be able to predict back the values from a multi-GPU model
+        import tensorflow as tf
+
         shape = tf.shape(data)
         size = tf.concat([ shape[:1] // parts, shape[1:] ],axis=0)
         stride = tf.concat([ shape[:1] // parts, shape[1:]*0 ],axis=0)
