@@ -63,20 +63,21 @@ args = {
 }
 parameters = Struct(**args)
 
-X, Y = dspp.load_data()
-weights = generate_weights(Y, parameters)
-
-X = [lettercode2onehot(x) for x in X]
-X = pad(X, 20*parameters.N)
-Y = pad(Y, parameters.N)
-
 if __name__ == '__main__':
+
+    X, Y = dspp.load_data()
+    weights = generate_weights(Y)
+
+    X = [lettercode2onehot(x) for x in X]
+    X = pad(X, 20*parameters.N)
+    Y = pad(Y, parameters.N)
+    weights = pad(weights, parameters.N)
 
     # Shuffle and split the data
     (x_train, y_train, weights_train), (x_test, y_test, weights_test) = shuffle_and_split(X, Y, weights)
 
     batch_size = 128
-    epochs = 1000
+    epochs = 10
 
     model = get_model(parameters)
     model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2], sample_weight=weights_train, sample_weight_mode="temporal")
