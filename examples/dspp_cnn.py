@@ -1,8 +1,6 @@
 '''
-Trains a simple convnet on the dSPP (https://peptone.io/dssp) dataset.
-
+Basic convnet on the dSPP (https://peptone.io/dssp) dataset.
 Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
-
 '''
 
 from __future__ import print_function
@@ -27,9 +25,9 @@ def get_model(parameters):
     # Reshaping
     model.add(Reshape((20, parameters.N), input_shape=(parameters.N*20,), name="Sequence"))
 
-    model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_2_1"))
+    model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_1"))
     model.add(BatchNormalization())
-    model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_2_2"))
+    model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_2"))
     model.add(BatchNormalization())
     model.add(MaxPooling1D(1, strides=None, padding='same', name="AA_Pooling_2"))
 
@@ -86,13 +84,16 @@ if __name__ == '__main__':
 
     model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test, weights_test), callbacks=[lossRatio()])
     score = model.evaluate(x_test, y_test, sample_weight=weights_test)
+
+    # Just some simple diagnostics
     print()
     print('Test rmsd:', score[0])
     print('Test chi2:', score[1])
 
-    # serialize model to JSON
+    # Serialize model to JSON
     with open("model.json", "w") as fp:
         fp.write(model.to_json())
-    # serialize weights to HDF5
+
+    # Serialize weights to HDF5
     model.save_weights("model.h5")
     print("Saved model to disk")

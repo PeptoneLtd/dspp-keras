@@ -1,13 +1,9 @@
+'''
+Utilities for convnet on the dSPP (https://peptone.io/dssp) dataset.
+Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
+'''
 
-from __future__ import print_function
-import keras
-from dsppkeras.datasets import dspp
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Reshape, Conv1D, MaxPooling1D, BatchNormalization, Activation, Dropout
 from keras.callbacks import Callback
-from keras.losses import logcosh
-from keras import backend as K
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -20,6 +16,9 @@ class lossRatio(Callback):
         R = logs.get('loss')/logs.get('val_loss')
         print(" R(l/v_l)={:2.2f}".format(R))
 
+class Struct:
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
 
 def lettercode2onehot(sequence):
     """
@@ -95,13 +94,9 @@ def chi2(exp, obs):
                 tf.subtract(foo(obs, mask),foo(exp, mask)),
             2),
         foo(exp, mask)),
-    name="log_chi2_statistics")
+    name="chi2_statistics")
 
     return stat
-
-class Struct:
-    def __init__(self, **entries):
-        self.__dict__.update(entries)
 
 def handle_nan_distribution(X, Y):
     df = pd.DataFrame({"Seq": np.concatenate([list(x) for x in X]), "ncSPC": np.concatenate(Y)})
