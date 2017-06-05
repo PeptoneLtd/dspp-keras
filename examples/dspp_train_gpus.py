@@ -78,12 +78,18 @@ if __name__ == '__main__':
 
     batch_size = 3072
     epochs = 100
+    gpus = 2
 
     model = get_model(parameters)
-    model = make_parallel(model, 2)
+
+    # prepare the model for multi-GPU training
+    model = make_parallel(model, gpus)
+
     model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2], sample_weight=weights_train, sample_weight_mode="temporal")
 
     model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test, weights_test), callbacks=[lossRatio()])
+
+    # Compute the score using test data
     score = model.evaluate(x_test, y_test, sample_weight=weights_test)
 
     # Just some simple diagnostics
