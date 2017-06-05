@@ -1,5 +1,5 @@
 from keras.models import model_from_json
-from dspp_cnn import X, Y, weights
+from dspp_train import X, Y, weights
 from dsppkeras.datasets import dspp
 
 # load YAML and create model
