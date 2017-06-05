@@ -38,12 +38,12 @@ def lettercode2onehot(sequence):
     encoded = np.asarray(encoded)
     return list(encoded.flatten())
 
-def generate_weights(array, parameters):
+def generate_weights(array):
     results = []
     for row in array:
-        w = np.zeros(parameters.N)
+        w = np.zeros(len(row))
         mask = row != 0.0
-        w[np.where(mask)] = 1.0
+        w[mask] = 1.0
         results.append(w)
     weights = np.array(results)
     return weights
