@@ -4,7 +4,7 @@ Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
 '''
 
 from __future__ import print_function
-import keras
+import keras, os
 from dsppkeras.datasets import dspp
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
@@ -90,10 +90,14 @@ if __name__ == '__main__':
     print('Test rmsd:', score[0])
     print('Test chi2:', score[1])
 
+    # Make sure we have output directory
+    if not os.path.exists("./model"):
+        os.makedirs("./model")
+
     # Serialize model to JSON
-    with open("model.json", "w") as fp:
+    with open("./model/model.json", "w") as fp:
         fp.write(model.to_json())
 
     # Serialize weights to HDF5
-    model.save_weights("model.h5")
-    print("Saved model to disk")
+    model.save_weights("./model/model.h5")
+    print("Saved model to ./model/")
