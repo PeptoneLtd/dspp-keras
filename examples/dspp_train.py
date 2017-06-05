@@ -64,7 +64,6 @@ args = {
 parameters = Struct(**args)
 
 X, Y = dspp.load_data()
-X, Y = handle_nan_distribution(X, Y)
 weights = generate_weights(Y, parameters)
 
 X = [lettercode2onehot(x) for x in X]
