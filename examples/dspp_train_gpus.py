@@ -1,5 +1,5 @@
 '''
-Basic convnet on the dSPP (https://peptone.io/dssp) dataset.
+Multi GPU version of basic convnet on the dSPP (https://peptone.io/dssp) dataset.
 Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
 '''
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     batch_size = 8000
 
     # At least 1000 epochs are required to get ~0.2 RMSD
-    epochs = 5
+    epochs = 1000
 
     # Our test system comprises 2 x NVIDIA TitanXP
     gpus = 2
