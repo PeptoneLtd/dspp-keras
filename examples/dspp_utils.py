@@ -40,9 +40,10 @@ def lettercode2onehot(sequence):
 
 def generate_weights(array, parameters):
     results = []
-    for element in array:
+    for row in array:
         w = np.zeros(parameters.N)
-        w[:len(element)] = 1.0
+        mask = row != 0.0
+        w[np.where(mask)] = 1.0
         results.append(w)
     weights = np.array(results)
     return weights
