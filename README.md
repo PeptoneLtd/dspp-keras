@@ -63,6 +63,19 @@ contact us at _support@peptone.io_.
 
 
 # Reference
-`dspp-keras` is based on ongoing scientific research into protein stability and intrinsic disorder:
+`dspp-keras` is based on ongoing scientific research into protein stability and intrinsic disorder. Therefore we suggest:
 1. Download and read the **original research paper** at http://biorxiv.org/content/early/2017/06/01/144840
 2. Search, browse and download complete **dSPP** database at https://peptone.io/dspp
+3. Please cite this work as,
+```
+@article {Tamiola144840,
+	author = {Tamiola, Kamil and Heberling, Matthew Michael and Domanski, Jan},
+	title = {Structural Propensity Database Of Proteins},
+	year = {2017},
+	doi = {10.1101/144840},
+	publisher = {Cold Spring Harbor Labs Journals},
+	URL = {http://biorxiv.org/content/early/2017/06/01/144840},
+	eprint = {http://biorxiv.org/content/early/2017/06/01/144840.full.pdf},
+	journal = {bioRxiv}
+}
+```
