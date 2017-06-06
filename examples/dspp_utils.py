@@ -54,7 +54,7 @@ def lettercode2number(sequence):
     assert(len(sequence) >= 1)
     encoded = []
     for letter in sequence:
-        encoded.append(one_digit[letter])
+        encoded.append(one_digit[letter]+1)
     assert(len(encoded) == len(sequence))
     encoded = np.asarray(encoded)
     return list(encoded.flatten())
