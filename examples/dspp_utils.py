@@ -42,6 +42,23 @@ def lettercode2onehot(sequence):
     encoded = np.asarray(encoded)
     return list(encoded.flatten())
 
+def lettercode2number(sequence):
+    """
+        Return an integer vector with amino acid identities, shifted by +1.
+        We want to make sure 0 is used for padding and missing data.
+    """
+    one_digit = {'A': 0, 'C': 1, 'D': 2, 'E': 3, 'F': 4,'G': 5,
+    'H': 6, 'I': 7, 'K': 8, 'L': 9, 'M': 10, 'N': 11,'P': 12,
+     'Q': 13, 'R': 14, 'S': 15, 'T': 16, 'V': 17,'W': 18, 'Y': 19, 'X': 20}
+
+    assert(len(sequence) >= 1)
+    encoded = []
+    for letter in sequence:
+        encoded.append(one_digit[letter])
+    assert(len(encoded) == len(sequence))
+    encoded = np.asarray(encoded)
+    return list(encoded.flatten())
+
 def generate_weights(array):
     results = []
     for row in array:
