@@ -4,7 +4,7 @@ Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
 '''
 
 from __future__ import print_function
-import keras, os
+import keras, os, time
 from dsppkeras.datasets import dspp
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
@@ -88,10 +88,13 @@ if __name__ == '__main__':
     batch_size = 8000
 
     # At least 1000 epochs are required to get ~0.2 RMSD
-    epochs = 1000
+    epochs = 10
 
     # Our test system comprises 2 x NVIDIA TitanXP
     gpus = 2
+
+    # Measure time
+    tic = time.time()
 
     # Initialize our model with user-supplied parameters
     model = get_model(parameters)
@@ -106,10 +109,16 @@ if __name__ == '__main__':
     # Compute the score using test data
     score = model.evaluate(x_test, y_test, sample_weight=weights_test)
 
+    # Measure time
+    toc = time.time()
+
     # Just some simple diagnostics
     print()
     print('Test rmsd:', score[0])
     print('Test chi2:', score[1])
+
+    # Print out time
+    print('Training time {}h {}m {}s'.format(timeit(toc-tic)[0], timeit(toc-tic)[1], timeit(toc-tic)[2]))
 
     # Make sure we have output directory
     if not os.path.exists("./model"):

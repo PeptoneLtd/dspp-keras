@@ -4,7 +4,7 @@ Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
 '''
 
 from __future__ import print_function
-import keras, os
+import keras, os, time
 from dsppkeras.datasets import dspp
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
@@ -76,8 +76,11 @@ if __name__ == '__main__':
     # Shuffle and split the data
     (x_train, y_train, weights_train), (x_test, y_test, weights_test) = shuffle_and_split(X, Y, weights)
 
-    batch_size = 128
+    batch_size = 8000
     epochs = 10
+
+    # Measure time
+    tic = time.time()
 
     model = get_model(parameters)
     model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2], sample_weight=weights_train, sample_weight_mode="temporal")
@@ -85,10 +88,16 @@ if __name__ == '__main__':
     model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test, weights_test), callbacks=[lossRatio()])
     score = model.evaluate(x_test, y_test, sample_weight=weights_test)
 
+    # Measure time
+    toc = time.time()
+
     # Just some simple diagnostics
     print()
     print('Test rmsd:', score[0])
     print('Test chi2:', score[1])
+
+    # Output time
+    print('Training time {}h {}m {}s'.format(timeit(toc-tic)[0], timeit(toc-tic)[1], timeit(toc-tic)[2]))
 
     # Make sure we have output directory
     if not os.path.exists("./model"):

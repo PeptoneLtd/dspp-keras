@@ -103,6 +103,13 @@ def chi2(exp, obs):
 
     return stat
 
+def timeit(t):
+    """
+        Compute time in h,m,s format for performance logging
+    """
+    m, s = divmod(t, 60)
+    h, m = divmod(m, 60)
+    return int(h),int(m),int(s)
 
 def make_parallel(model, gpu_count):
     """
