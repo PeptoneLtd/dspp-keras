@@ -61,10 +61,10 @@ if __name__ == '__main__':
     tic = time.time()
 
     model = get_model(parameters)
-    model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2], sample_weight=weights_train, sample_weight_mode="temporal")
+    model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2])
 
-    model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test, weights_test), callbacks=[lossRatio()])
-    score = model.evaluate(x_test, y_test, sample_weight=weights_test)
+    model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test), callbacks=[lossRatio()])
+    score = model.evaluate(x_test, y_test)
 
     # Measure time
     toc = time.time()
