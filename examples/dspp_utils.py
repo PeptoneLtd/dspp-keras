@@ -89,9 +89,6 @@ def shuffle_and_split(X, Y, weights, seed=123456, fraction=0.8):
     (x_train, y_train, weights_train) = (X[training_idx], Y[training_idx], weights[training_idx])
     (x_test, y_test, weights_test) = (X[test_idx], Y[test_idx], weights[test_idx])
 
-    y_test = np.reshape(y_test, y_test.shape + (1,))
-    y_train = np.reshape(y_train, y_train.shape + (1,))
-
     return (x_train, y_train, weights_train), (x_test, y_test, weights_test)
 
 def rmsd(y_true, y_pred):
