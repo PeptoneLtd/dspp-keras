@@ -22,7 +22,7 @@ from dspp_utils import *
 
 def get_model(parameters) :
     model = keras.models.Sequential()
-    model.add(Embedding(parameters.N, 256))
+    model.add(Embedding(21, 256, input_length=parameters.N))
     model.add(LSTM(128, activation='sigmoid', inner_activation='hard_sigmoid'))
     model.add(Dropout(0.5))
     model.add(Dense(parameters.N, name="Propensity"))
