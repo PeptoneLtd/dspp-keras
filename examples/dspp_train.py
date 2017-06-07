@@ -7,10 +7,12 @@ from __future__ import print_function
 import keras, os, time
 from dsppkeras.datasets import dspp
 from keras.preprocessing import sequence
+
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Reshape, Conv1D, MaxPooling1D, BatchNormalization, Activation, Dropout
-from keras.callbacks import Callback
+from keras.layers.core import Dense, Dropout, Activation
+from keras.layers.embeddings import Embedding
+from keras.layers.recurrent import LSTM
+
 from keras.losses import logcosh
 from keras import backend as K
 import numpy as np
@@ -18,38 +20,14 @@ import pandas as pd
 import tensorflow as tf
 from dspp_utils import *
 
-
-def get_model(parameters):
-
-    model = Sequential()
-
-    # Reshaping
-    model.add(Reshape((20, parameters.N), input_shape=(parameters.N*20,), name="Sequence"))
-
-    model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_1"))
-    model.add(BatchNormalization())
-    model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_2"))
-    model.add(BatchNormalization())
-    model.add(MaxPooling1D(1, strides=None, padding='same', name="AA_Pooling_2"))
-
-    model.add(Flatten())
-
-    # Classes and storage
-    model.add(Dense(parameters.ND1, name="Class_Encoder1"))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(Dropout(parameters.d2))
-
-    model.add(Dense(parameters.ND1, name="Class_Encoder2"))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(Dropout(parameters.d2))
-
-    # Predictions
+def get_model(parameters) :
+    model = keras.models.Sequential()
+    model.add(Embedding(parameters.N, 256))
+    model.add(LSTM(256, 128, activation='sigmoid', inner_activation='hard_sigmoid'))
+    model.add(Dropout(0.5))
+    model.add(Dense(128, 2, init='uniform'))
+    model.add(Activation('sigmoid'))
     model.add(Dense(parameters.N, name="Propensity"))
-    model.add(Reshape((parameters.N, 1), input_shape=(parameters.N,)))
-    print(model.summary())
-
     return model
 
 # all free parameters for the model
