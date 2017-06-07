@@ -6,6 +6,7 @@ Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
 from __future__ import print_function
 import keras, os, time
 from dsppkeras.datasets import dspp
+from keras.preprocessing import sequence
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Reshape, Conv1D, MaxPooling1D, BatchNormalization, Activation, Dropout
@@ -66,10 +67,10 @@ parameters = Struct(**args)
 X, Y = dspp.load_data()
 weights = generate_weights(Y)
 
-X = [lettercode2onehot(x) for x in X]
-X = pad(X, 20*parameters.N)
-Y = pad(Y, parameters.N)
-weights = pad(weights, parameters.N)
+X = [lettercode2number(x) for x in X]
+X = sequence.pad_sequences(X, maxlen=parameters.N)
+Y = sequence.pad_sequences(Y, maxlen=parameters.N)
+#weights = pad(weights, parameters.N)
 
 if __name__ == '__main__':
 
