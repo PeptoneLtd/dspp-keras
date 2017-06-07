@@ -25,9 +25,8 @@ def get_model(parameters) :
     model.add(Embedding(parameters.N, 256))
     model.add(LSTM(128, activation='sigmoid', inner_activation='hard_sigmoid'))
     model.add(Dropout(0.5))
-    model.add(Dense(128, 2, init='uniform'))
-    model.add(Activation('sigmoid'))
     model.add(Dense(parameters.N, name="Propensity"))
+    model.add(Activation('sigmoid'))
     return model
 
 # all free parameters for the model
