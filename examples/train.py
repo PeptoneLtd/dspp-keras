@@ -47,7 +47,7 @@ if __name__ == '__main__':
     model = get_model(parameters)
     model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2], sample_weight=weights_train, sample_weight_mode="temporal")
 
-    model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test, weights_test), callbacks=[lossRatio()])
+    model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size, validation_data=(x_test, y_test, weights_test), callbacks=[RossRatio()])
     score = model.evaluate(x_test, y_test, sample_weight=weights_test)
 
     # Measure time
