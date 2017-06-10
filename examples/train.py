@@ -11,38 +11,12 @@ from keras.layers import Dense, Dropout, Flatten, Reshape, Conv1D, MaxPooling1D,
 from keras.losses import logcosh
 from utils import Struct, lettercode2onehot, shuffle_and_split, LossRatio
 
-
-def get_model(parameters):
-
+def get_model(config):
+    """
+    Build model given some initial configuration
+    """
     model = Sequential()
-
-    # Reshaping
-    model.add(Reshape((20, parameters.N), input_shape=(parameters.N*20,), name="Sequence"))
-
-    model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_1"))
-    model.add(BatchNormalization())
-    model.add(Conv1D(2*parameters.N1, parameters.kernel1, padding="same", activation='relu', name="AA_Conv_2"))
-    model.add(BatchNormalization())
-    model.add(MaxPooling1D(1, strides=None, padding='same', name="AA_Pooling_2"))
-
-    model.add(Flatten())
-
-    # Classes and storage
-    model.add(Dense(parameters.ND1, name="Class_Encoder1"))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(Dropout(parameters.d2))
-
-    model.add(Dense(parameters.ND1, name="Class_Encoder2"))
-    model.add(BatchNormalization())
-    model.add(Activation('relu'))
-    model.add(Dropout(parameters.d2))
-
-    # Predictions
-    model.add(Dense(parameters.N, name="Propensity"))
-    model.add(Reshape((parameters.N, 1), input_shape=(parameters.N,)))
-    print(model.summary())
-
+    model.add(Dense(config.N, input_shape=(config.N,), name="Prediction"))
     return model
 
 # all free parameters for the model
