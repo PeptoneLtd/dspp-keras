@@ -9,6 +9,7 @@ from dsppkeras.datasets import dspp
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, Reshape, Conv1D, MaxPooling1D, BatchNormalization, Activation
 from keras.losses import logcosh
+from utils import Struct, lettercode2onehot, shuffle_and_split, LossRatio
 
 
 def get_model(parameters):
