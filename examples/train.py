@@ -22,12 +22,6 @@ def get_model(config):
 # all free parameters for the model
 args = {
     "N": 800,
-    "d1": 0.25, # never used
-    "kernel1": 60,
-    "p1": 2, # never used
-    "N1": 40,
-    "ND1": 800,
-    "d2": 0.5,
 }
 parameters = Struct(**args)
 
