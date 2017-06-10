@@ -12,7 +12,7 @@ import pandas as pd
 import tensorflow as tf
 
 
-class lossRatio(Callback):
+class LossRatio(Callback):
     """
         An extension of Callback class that logs the `loss`/`val_loss` ratio
     """
