@@ -7,15 +7,8 @@ from __future__ import print_function
 import keras, os, time
 from dsppkeras.datasets import dspp
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Reshape, Conv1D, MaxPooling1D, BatchNormalization, Activation, Dropout
-from keras.callbacks import Callback
+from keras.layers import Dense, Dropout, Flatten, Reshape, Conv1D, MaxPooling1D, BatchNormalization, Activation
 from keras.losses import logcosh
-from keras import backend as K
-import numpy as np
-import pandas as pd
-import tensorflow as tf
-from dspp_utils import *
 
 
 def get_model(parameters):
