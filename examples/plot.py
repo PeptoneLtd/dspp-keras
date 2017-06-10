@@ -6,12 +6,12 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 # load YAML and create model
-with open('./model/model.json', 'r') as fp:
+with open('model.json', 'r') as fp:
     model = model_from_json(fp.read())
 
 # load weights into new model
-model.load_weights("./model/model.h5")
-print("Loaded model /model/model.h5")
+model.load_weights("model.h5")
+print("Loaded model model.h5")
 
 # predict data
 print("Predicting data...")
@@ -29,9 +29,5 @@ for i, (exp, w, pred) in enumerate(zip(Y[::100], weights[::100], prediction)):
     ax.set_xlim(0,250)
 fig.tight_layout()
 
-# prepare the
-if not os.path.exists("./model"):
-    os.makedirs("./model")
-
-fig.savefig("model/plot.png")
-print("Plot saved as model/plot.png")
+fig.savefig("plot.png")
+print("Plot saved as plot.png")
