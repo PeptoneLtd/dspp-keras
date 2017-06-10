@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 '''
-Utilities for convnet on the dSPP (https://peptone.io/dssp) dataset.
+Utilities for boilerplate model with dSPP (https://peptone.io/dssp) dataset.
 Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
 '''
 from __future__ import print_function

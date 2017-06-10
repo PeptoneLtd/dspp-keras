@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 '''
-Basic convnet on the dSPP (https://peptone.io/dssp) dataset.
+train.py
+A boilerplate for Deep Learning models using 
+dSPP - Database of Structural Propensities of Proteins (https://peptone.io/dssp) dataset.
 Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
 '''
 
@@ -18,12 +20,11 @@ from utils import Struct, lettercode2onehot, shuffle_and_split, generate_weights
 
 def get_model(args):
     """
-    Build model given some initial configuration
+    Boilerplate model given some initial configuration
 
-    WARNING this is decoy model that serves no practical pourpose
-    The model has 12 mln trainable paramaters, which is more than the dataset...
-    Obviously it makes no sense and is shown just as a demo.
-    
+    WARNING this is a boilerplate model simply to get you started
+    with dSPP and structural propensities of proteins.
+
     """
     model = Sequential()
     model.add(Dense(args.maxlen, input_shape=(20*args.maxlen,), name="Prediction"))
@@ -47,6 +48,7 @@ if __name__ == '__main__':
     # Shuffle and split the data
     (x_train, y_train, weights_train), (x_test, y_test, weights_test) = shuffle_and_split(X, Y, weights)
 
+    # Training parameters
     batch_size = 128
     epochs = 10
 
