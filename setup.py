@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 setup(name='DSPP-Keras',
-      version='0.0.3',
+      version='0.0.4',
       description='Integration of Database of structural propensities of proteins (dSPP) with Keras Machine Learning Library',
       author='Jan Domanski',
       author_email='jan@peptone.io',
