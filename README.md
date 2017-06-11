@@ -1,6 +1,6 @@
 # Introduction
 
-`dspp-keras` is a Keras integration for Database of Structural Propensities of Proteins, which provides **amino acid sequences** of  7200+ unrelated proteins with their **propensities to form secondary structures or stay disordered**.
+`dspp-keras` is a Keras integration for [Database of Structural Propensities of Proteins](https://peptone.io/dspp), which provides **amino acid sequences** of  7200+ unrelated proteins with their **propensities to form secondary structures or stay disordered**.
 
 To fully understand and explore the potential of `dspp-keras` we strongly encourage you to read the rest of this document, scroll through the **FAQ** section, and train the test model from `example/` directory.
 
@@ -22,7 +22,7 @@ Just like every other molecule present in our natural environment, polypeptide c
 
 Under conditions of living organisms (*aka native conditions*) in aqueous environment, protein solution of any polypeptide is in fact made of copies of molecules (*aka ensemble), which at given moment in time have slightly different structures, as a consequence of protein dynamics.
 
-[MOAG]
+![MOAG-4](https://drive.google.com/open?id=0B0VsF9FO3J_OdExsWkZ5d21jSHM)
 
 Image above demonstrates the superposition of models belonging to structural ensemble of MOAG-4 protein, which in turn controls aggregation of proteins implicated in Parkinson’s disease. You can infer from this model that MOAG-4 has a **stable** (that is defined) **alpha-helical** structure coloured in blue, and a highly disordered tail, depicted by floating polypeptide chains of individual ensemble members.
 
@@ -31,7 +31,7 @@ Image above demonstrates the superposition of models belonging to structural ens
 
 MOAG-4 is a seminal example of protein that exhibits structural disorder, a truly perplexing property of very many polypeptides. Alpha-synuclein, pictured below, is the most representative example of a completely disordered protein. Although the ensemble of Alpha-synuclein is completely heterogenous, this protein plays an important role in neurotransmitter mediation in human brain, and has been implicated as the key player in Parkinson’s disease development.
 
-[ASYN]
+![Alpha-synuclein](https://drive.google.com/open?id=0B0VsF9FO3J_ORjRBZElzM3pHeFE)
 
 ## Putting protein order and disorder together
 
@@ -63,13 +63,13 @@ X, Y = dspp.load_data()
 
 *Note: An annotated example of a boilerplate neural network can be found in `examples/`*.
 
-## Input data (X):
+## Training input data `X`:
 
 A one-hot encoded amino-acids sequence vector.
 
-## Output data (Y):
+## Training output data `Y`:
 
-The structural propensity score tensor. Individual, residue-specific scores are bound between `-1.0` and `1.0`. Negative propensity implicates the sampling of **beta-sheet** conformations. A score of `0.0` indicates behaviour found in **disordered** proteins, whereas `1.0` is an indicator of properly folded protein. A score of `0.5` should be understood as a situation when 50% of ensemble members form a helix and the remaining part samples different conformations.
+The structural propensity score tensor. Individual, residue-specific scores are bound between `-1.0` and `1.0`. Negative propensity implicates the sampling of **beta-sheet** conformations. A score of `0.0` indicates behaviour found in **disordered** proteins, whereas `1.0` is an indicator of properly folded **alpha-helix**. A score of `0.5` should be understood as a situation when 50% of ensemble members form a helix and the remaining part samples different conformations.
 
 # Interactive protein search
 
@@ -106,5 +106,22 @@ Should you have questions related to scientific and industrial implications of *
 # Frequently Asked Questions
 
 ### What does dSPP stand for?
-
 dSPP - Database of Structural Propensities of Proteins
+
+### What’s the difference between dSPP and other protein data sets?
+As opposed to binary secondary structure assignment available in the most protein datasets, we are in an unique position to report on protein structure and local dynamics. Please [read our paper](http://biorxiv.org/content/early/2017/06/01/144840) to learn more about the benefit of propensity inclusion.
+
+### How did you arrive at structural propensity?
+It is a relatively long subject, far beyond the scope of this short document. Please [read our paper](http://biorxiv.org/content/early/2017/06/01/144840). The exact procedure is described in detail in the *Materials and Methods* together with relevant references.
+
+### How many proteins are in dSPP?
+Currently 7200+. However, the database is on an automatic **14 day** update cycle, hence we expect it to grow.
+
+### What about experimental conditions relevant to dSPP data?
+The experimental data in dSPP have been collected in solution and solid state NMR experiments. The average experimental temperature is `295K`, pH of `6.9` and ionic strength of `~100mM`. Please [read our paper](http://biorxiv.org/content/early/2017/06/01/144840) to learn more.
+
+### Can I contribute to dSPP data-set?
+Yes. If you happen to have a newly assigned protein, please follow the submission procedure to [BMRB](http://www.bmrb.wisc.edu/). As only your data becomes available in BMRB and passes our quality checks we will include it in our repository.
+
+### Are you planning to bundle more features with dSPP?
+Yes. We are actively developing on an expansion of dSPP, which will contain additional experimental data to model protein stability and local dynamics.
