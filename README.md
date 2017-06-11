@@ -22,7 +22,7 @@ Just like every other molecule present in our natural environment, polypeptide c
 
 Under conditions of living organisms (*aka native conditions*) in aqueous environment, protein solution of any polypeptide is in fact made of copies of molecules (*aka ensemble), which at given moment in time have slightly different structures, as a consequence of protein dynamics.
 
-![MOAG-4](https://drive.google.com/open?id=0B0VsF9FO3J_OdExsWkZ5d21jSHM)
+![MOAG-4](https://lh4.googleusercontent.com/6wDXf_zTV3KMMMGUK1YGG0gpzatHvW6tWv2ROKIVAO9b-VSt1PcpazmqNr56h8nF6jTSAD4IHBuOx2s=w1409-h810-rw)
 
 Image above demonstrates the superposition of models belonging to structural ensemble of MOAG-4 protein, which in turn controls aggregation of proteins implicated in Parkinson’s disease. You can infer from this model that MOAG-4 has a **stable** (that is defined) **alpha-helical** structure coloured in blue, and a highly disordered tail, depicted by floating polypeptide chains of individual ensemble members.
 
@@ -31,7 +31,7 @@ Image above demonstrates the superposition of models belonging to structural ens
 
 MOAG-4 is a seminal example of protein that exhibits structural disorder, a truly perplexing property of very many polypeptides. Alpha-synuclein, pictured below, is the most representative example of a completely disordered protein. Although the ensemble of Alpha-synuclein is completely heterogenous, this protein plays an important role in neurotransmitter mediation in human brain, and has been implicated as the key player in Parkinson’s disease development.
 
-![Alpha-synuclein](https://drive.google.com/open?id=0B0VsF9FO3J_ORjRBZElzM3pHeFE)
+![Alpha-synuclein](https://lh6.googleusercontent.com/3T3ovc3Lw6hVHw-uvxIAQGyAl_6Z3m-jWSbLFIQTOUxFRMqS14HikE3kC6r_l6GTCLE052TBoIcW8Cg=w1409-h810-rw)
 
 ## Putting protein order and disorder together
 
