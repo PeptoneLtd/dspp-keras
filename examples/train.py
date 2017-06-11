@@ -2,7 +2,7 @@
 
 '''
 train.py
-A boilerplate for Deep Learning models using 
+A boilerplate for Deep Learning models using
 dSPP - Database of Structural Propensities of Proteins (https://peptone.io/dssp) dataset.
 Peptone Inc. - The Protein Intelligence Company (https://peptone.io)
 '''
@@ -24,7 +24,6 @@ def get_model(args):
 
     WARNING this is a boilerplate model simply to get you started
     with dSPP and structural propensities of proteins.
-
     """
     model = Sequential()
     model.add(Dense(args.maxlen, input_shape=(20*args.maxlen,), name="Prediction"))
@@ -53,7 +52,7 @@ if __name__ == '__main__':
     epochs = 10
 
     model = get_model(parameters)
-    model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2], sample_weight=weights_train)
+    model.compile(optimizer=keras.optimizers.Adam(), loss=logcosh, metrics=[rmsd, chi2])
 
     model.fit(x=x_train, y=y_train, epochs=epochs, batch_size=batch_size,
               validation_data=(x_test, y_test), callbacks=[LossRatio()])

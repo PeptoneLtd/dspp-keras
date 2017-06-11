@@ -53,6 +53,10 @@ def generate_weights(array):
 def shuffle_and_split(X, Y, weights, seed=123456, fraction=0.8):
     assert X.shape[0] == Y.shape[0]
     assert X.shape[0] == weights.shape[0]
+
+    # X = X.reshape(X.shape + (1,))
+    # weights = weights.reshape(weights.shape + (1,))
+
     N = X.shape[0]
     np.random.seed(seed)
     indices = np.random.permutation(N)
