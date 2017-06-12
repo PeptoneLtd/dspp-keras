@@ -48,6 +48,8 @@ Consequently, the ensemble behaviour of partially disordered MOAG-4 can be chara
 
 Importantly, our method excels at capturing residual intrinsic disorder, as brought on example of intrinsically disordered Alpha-synuclein.
 
+![Alpha-synuclein](https://lh6.googleusercontent.com/3T3ovc3Lw6hVHw-uvxIAQGyAl_6Z3m-jWSbLFIQTOUxFRMqS14HikE3kC6r_l6GTCLE052TBoIcW8Cg=w1409-h810-rw)
+![Alpha-synuclein propesnity](https://lh5.googleusercontent.com/43KuJH0Cl7s-Ntf9_LS2xZUZEDt4IR8u0LDW_FZsj2oh7U4im_m1Dp26F1A3i6JFgCov7HUPWHcu5Nk=w1152-h848-rw)
 
 # Installation
 
