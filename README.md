@@ -34,7 +34,7 @@ _Note: MOAG-4 ensemble model has been kindly provided by Frans A.A. Mulder (Aarh
 
 [MOAG-4 (**dSPP27058_0** in our database)](https://peptone.io/dspp/entry/dSPP27058_0) is a medically relevant example of protein that exhibits high degree of intrinsic structural disorder.
 
-![Alpha-synuclein](https://u7932438.dl.dropboxusercontent.com/u/7932438/MOAG-4-ensemble-1b.png)
+![Alpha-synuclein](https://data.peptone.io/dspp-keras/asyn.png)
 
 Alpha-synuclein, pictured above, is a seminal example of a completely disordered protein. Although the ensemble of Alpha-synuclein is heterogenous, [this protein plays an important role in neurotransmitter mediation in human brain, and has been implicated as the key player in Parkinson’s disease development.](http://science.sciencemag.org/content/338/6109/949)
 
