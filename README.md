@@ -22,7 +22,7 @@ Just like every other molecule present in our natural environment, polypeptide c
 
 Under conditions of living organisms (*aka native conditions*) in aqueous environment, the state of a polypeptide can be thought of as an ensemble of structures, which at the given moment in time have slightly different conformation, as a consequence of protein dynamics and intrinsic “flexibility”.
 
-![MOAG-4](https://lh3.googleusercontent.com/0C95wGJf2gNsTQW84SHLCuGICJhpb6ZVTYEqkO6IG1TK4H1YjR64QlXr9GxLwwTMlJGJeU5nHN3lWN4=w1531-h914-rw)
+![MOAG-4](https://u7932438.dl.dropboxusercontent.com/u/7932438/MOAG-4-ensemble-1b.png)
 
 Image above demonstrates the superposition of models belonging to structural ensemble of MOAG-4 protein, [which in turn controls aggregation of proteins implicated in Parkinson’s disease](http://www.jbc.org/content/early/2017/03/23/jbc.M116.764886). You can infer from this model that MOAG-4 has a **stable** (well-defined) **alpha-helical** structure colored in grey, and a highly disordered tail, depicted by floating polypeptide chains of individual ensemble members.
 
@@ -34,7 +34,7 @@ _Note: MOAG-4 ensemble model has been kindly provided by Frans A.A. Mulder (Aarh
 
 [MOAG-4 (**dSPP27058_0** in our database)](https://peptone.io/dspp/entry/dSPP27058_0) is a medically relevant example of protein that exhibits high degree of intrinsic structural disorder.
 
-![Alpha-synuclein](https://lh6.googleusercontent.com/3T3ovc3Lw6hVHw-uvxIAQGyAl_6Z3m-jWSbLFIQTOUxFRMqS14HikE3kC6r_l6GTCLE052TBoIcW8Cg=w1409-h810-rw)
+![Alpha-synuclein](https://u7932438.dl.dropboxusercontent.com/u/7932438/MOAG-4-ensemble-1b.png)
 
 Alpha-synuclein, pictured above, is a seminal example of a completely disordered protein. Although the ensemble of Alpha-synuclein is heterogenous, [this protein plays an important role in neurotransmitter mediation in human brain, and has been implicated as the key player in Parkinson’s disease development.](http://science.sciencemag.org/content/338/6109/949)
 
@@ -45,15 +45,15 @@ _Note: The Alpha-synuclein ensemble has been adopted from ["Structural Ensembles
 
 Among the multitude of advanced experimental protein techniques, NMR spectroscopy offers exquisite sensitivity to structural detail and dynamics at a single residue level. We have used NMR resonance assignment data from 7200+ proteins stored in public repositories and computed sequence-specific propensity scores.
 
-![MOAG-4](https://lh3.googleusercontent.com/ILx35W5S6Yybg7Lk75e6yQo0aXOM6mvQpuJimmu67i64HkxUBGeNce5BQoULRBOhgX39Kzx_tO1_Ecs=w1143-h843-rw)
-![Structural propensity of MOAG-4](https://lh3.googleusercontent.com/Doc_CnN5PWgfgBju2wVW1zt7G2yiqC7j_HrMpzl4xDD3k9YxEAqlz140magInT0PgG2vL9Ct1QNA1VA=w1143-h843-rw)
+![MOAG-4](https://u7932438.dl.dropboxusercontent.com/u/7932438/MOAG-4-ensemble.png)
+![Structural propensity of MOAG-4](https://u7932438.dl.dropboxusercontent.com/u/7932438/MOAG-4-propensity.png)
 
 The ensemble behavior of partially disordered MOAG-4 can be characterized and compressed (with few critical assumptions [discussed in our paper](http://biorxiv.org/content/early/2017/06/01/144840)) to structural propensity vector.
 
 Importantly, our method excels at capturing residual intrinsic disorder, as brought by the example of intrinsically disordered Alpha-synuclein.
 
-![Alpha-synuclein](https://lh6.googleusercontent.com/3T3ovc3Lw6hVHw-uvxIAQGyAl_6Z3m-jWSbLFIQTOUxFRMqS14HikE3kC6r_l6GTCLE052TBoIcW8Cg=w1409-h810-rw)
-![Alpha-synuclein propesnity](https://lh5.googleusercontent.com/43KuJH0Cl7s-Ntf9_LS2xZUZEDt4IR8u0LDW_FZsj2oh7U4im_m1Dp26F1A3i6JFgCov7HUPWHcu5Nk=w1152-h848-rw)
+![Alpha-synuclein](https://u7932438.dl.dropboxusercontent.com/u/7932438/asyn.png)
+![Alpha-synuclein propesnity](https://u7932438.dl.dropboxusercontent.com/u/7932438/asyn-propensity.png)
 
 # Installation
 
