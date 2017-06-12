@@ -35,11 +35,18 @@ MOAG-4 is a seminal example of protein that exhibits structural disorder, a trul
 
 ![Alpha-synuclein](https://lh6.googleusercontent.com/3T3ovc3Lw6hVHw-uvxIAQGyAl_6Z3m-jWSbLFIQTOUxFRMqS14HikE3kC6r_l6GTCLE052TBoIcW8Cg=w1409-h810-rw)
 
-Alpha-synuclein, pictured below, is the most representative example of a completely disordered protein. Although the ensemble of Alpha-synuclein is completely heterogenous, this protein plays an important role in neurotransmitter mediation in human brain, and has been implicated as the key player in Parkinson’s disease development.
+Alpha-synuclein, pictured above, is the most representative example of a completely disordered protein. Although the ensemble of Alpha-synuclein is completely heterogenous, this protein plays an important role in neurotransmitter mediation in human brain, and has been implicated as the key player in Parkinson’s disease development.
 
 ## Putting protein order and disorder together
 
-We have used NMR resonance assignment data from 7200+ proteins collected in public repositories to compute sequence-specific propensity scores. Please [read our paper](http://biorxiv.org/content/early/2017/06/01/144840) to learn more about the exact calculation procedure and other technical details.
+Among the multitude of advanced experimental protein techniques, NMR spectroscopy offers exquisite sensitivity to structural detail and dynamics. That is why we have used NMR resonance assignment data from 7200+ proteins stored in public repositories and computed sequence-specific propensity scores.
+
+![MOAG-4](https://lh3.googleusercontent.com/ILx35W5S6Yybg7Lk75e6yQo0aXOM6mvQpuJimmu67i64HkxUBGeNce5BQoULRBOhgX39Kzx_tO1_Ecs=w1143-h843-rw)
+![Structural propensity of MOAG-4](https://lh3.googleusercontent.com/Doc_CnN5PWgfgBju2wVW1zt7G2yiqC7j_HrMpzl4xDD3k9YxEAqlz140magInT0PgG2vL9Ct1QNA1VA=w1143-h843-rw)
+
+Consequently, the ensemble behaviour of partially disordered MOAG-4 can be characterised and compressed (with few critical assumptions [discussed in our paper](http://biorxiv.org/content/early/2017/06/01/144840)) to structural propensity vector.
+
+Importantly, our method excels at capturing residual intrinsic disorder, as brought on example of intrinsically disordered Alpha-synuclein.
 
 
 # Installation
