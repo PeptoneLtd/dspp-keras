@@ -22,7 +22,7 @@ Just like every other molecule present in our natural environment, polypeptide c
 
 Under conditions of living organisms (*aka native conditions*) in aqueous environment, the state of a polypeptide can be thought of as an ensemble of structures, which at the given moment in time have slightly different conformation, as a consequence of protein dynamics and intrinsic “flexibility”.
 
-![MOAG-4](https://u7932438.dl.dropboxusercontent.com/u/7932438/MOAG-4-ensemble-1b.png)
+![MOAG-4](https://data.peptone.io/dspp-keras/MOAG-4-ensemble-1b.png)
 
 Image above demonstrates the superposition of models belonging to structural ensemble of MOAG-4 protein, [which in turn controls aggregation of proteins implicated in Parkinson’s disease](http://www.jbc.org/content/early/2017/03/23/jbc.M116.764886). You can infer from this model that MOAG-4 has a **stable** (well-defined) **alpha-helical** structure colored in grey, and a highly disordered tail, depicted by floating polypeptide chains of individual ensemble members.
 
@@ -45,15 +45,15 @@ _Note: The Alpha-synuclein ensemble has been adopted from ["Structural Ensembles
 
 Among the multitude of advanced experimental protein techniques, NMR spectroscopy offers exquisite sensitivity to structural detail and dynamics at a single residue level. We have used NMR resonance assignment data from 7200+ proteins stored in public repositories and computed sequence-specific propensity scores.
 
-![MOAG-4](https://u7932438.dl.dropboxusercontent.com/u/7932438/MOAG-4-ensemble.png)
-![Structural propensity of MOAG-4](https://u7932438.dl.dropboxusercontent.com/u/7932438/MOAG-4-propensity.png)
+![MOAG-4](https://data.peptone.io/dspp-keras/MOAG-4-ensemble.png)
+![Structural propensity of MOAG-4](https://data.peptone.io/dspp-keras/MOAG-4-propensity.png)
 
 The ensemble behavior of partially disordered MOAG-4 can be characterized and compressed (with few critical assumptions [discussed in our paper](http://biorxiv.org/content/early/2017/06/01/144840)) to structural propensity vector.
 
 Importantly, our method excels at capturing residual intrinsic disorder, as brought by the example of intrinsically disordered Alpha-synuclein.
 
-![Alpha-synuclein](https://u7932438.dl.dropboxusercontent.com/u/7932438/asyn.png)
-![Alpha-synuclein propesnity](https://u7932438.dl.dropboxusercontent.com/u/7932438/asyn-propensity.png)
+![Alpha-synuclein](https://data.peptone.io/dspp-keras/asyn.png)
+![Alpha-synuclein propesnity](https://data.peptone.io/dspp-keras/asyn-propensity.png)
 
 # Installation
 
