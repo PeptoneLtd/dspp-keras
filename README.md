@@ -1,3 +1,4 @@
+
 # Introduction
 
 `dspp-keras` is a Keras integration for [Database of Structural Propensities of Proteins](https://peptone.io/dspp), which provides **amino acid sequences** of  7200+ unrelated proteins with their **propensities to form secondary structures or stay disordered**.
@@ -10,21 +11,22 @@ Proteins are complex biomolecules made of 20 building blocks, amino acids, which
 
 Unique spatial arrangement of polypeptide chains yields 3D molecular structures, which define protein function and interactions with other biomolecules.
 
-Although the very basic forces that govern protein 3D structure formation are known and understood, the exact nature of polypeptide folding remains elusive and has been a subject to overwhelming number of studies.
+Although the very basic forces that govern protein 3D structure formation are known and understood, the exact nature of polypeptide folding remains elusive and has been studied extensively.
 
 ## Protein dynamics
 
-Just like every other molecule present in our natural environment, polypeptide chains undergo molecular motions at time scales, which stretch from nanoseconds to minutes.
+Just like every other molecule present in our natural environment, polypeptide chains undergo molecular motions at time scales ranging from nanoseconds to minutes.
 
-**It is accepted that complete understanding of protein functions and activity requires the knowledge of structures and dynamics.**
+**It is accepted that complete understanding of protein        functions and activity requires knowledge of structures and dynamics.**
 
 ## Protein ensembles
 
-Under conditions of living organisms (*aka native conditions*) in aqueous environment, the state of a polypeptide can be thought of as an ensemble of structures, which at the given moment in time have slightly different conformation, as a consequence of protein dynamics and intrinsic “flexibility”.
+Under conditions of living organisms (*aka native conditions*) in an aqueous environment, the state of a polypeptide can be thought of as an ensemble of structures, which at any given moment in time have slightly different conformations, as a consequence of protein dynamics and intrinsic flexibility.
 
 ![MOAG-4](https://data.peptone.io/dspp-keras/MOAG-4-ensemble-1b.png)
 
-Image above demonstrates the superposition of models belonging to structural ensemble of MOAG-4 protein, [which in turn controls aggregation of proteins implicated in Parkinson’s disease](http://www.jbc.org/content/early/2017/03/23/jbc.M116.764886). You can infer from this model that MOAG-4 has a **stable** (well-defined) **alpha-helical** structure colored in grey, and a highly disordered tail, depicted by floating polypeptide chains of individual ensemble members.
+
+The image above demonstrates the superposition of models belonging to a structural ensemble of MOAG-4 protein, [which in turn controls aggregation of proteins implicated in Parkinson’s disease](http://www.jbc.org/content/early/2017/03/23/jbc.M116.764886). You can infer from this model that MOAG-4 has a **stable** (well-defined) **alpha-helical** structure colored in grey, and a highly disordered tail, depicted by floating polypeptide chains of individual ensemble members.
 
 ***
 
@@ -32,7 +34,7 @@ _Note: MOAG-4 ensemble model has been kindly provided by Frans A.A. Mulder (Aarh
 
 ## Protein disorder
 
-[MOAG-4 (**dSPP27058_0** in our database)](https://peptone.io/dspp/entry/dSPP27058_0) is a medically relevant example of protein that exhibits high degree of intrinsic structural disorder.
+[MOAG-4 (**dSPP27058_0** in our database)](https://peptone.io/dspp/entry/dSPP27058_0) is a medically relevant example of a protein that exhibits a high degree of intrinsic structural disorder.
 
 ![Alpha-synuclein](https://data.peptone.io/dspp-keras/asyn.png)
 
@@ -48,9 +50,9 @@ Among the multitude of advanced experimental protein techniques, NMR spectroscop
 ![MOAG-4](https://data.peptone.io/dspp-keras/MOAG-4-ensemble.png)
 ![Structural propensity of MOAG-4](https://data.peptone.io/dspp-keras/MOAG-4-propensity.png)
 
-The ensemble behavior of partially disordered MOAG-4 can be characterized and compressed (with few critical assumptions [discussed in our paper](http://biorxiv.org/content/early/2017/06/01/144840)) to structural propensity vector.
+The ensemble behavior of partially disordered MOAG-4 can be characterized and compressed (with few critical assumptions [discussed in our paper](http://biorxiv.org/content/early/2017/06/01/144840)) to a structural propensity vector.
 
-Importantly, our method excels at capturing residual intrinsic disorder, as brought by the example of intrinsically disordered Alpha-synuclein.
+Importantly, our method excels at capturing residual intrinsic disorder, as seen in the example of intrinsically disordered Alpha-synuclein.
 
 ![Alpha-synuclein](https://data.peptone.io/dspp-keras/asyn.png)
 ![Alpha-synuclein propesnity](https://data.peptone.io/dspp-keras/asyn-propensity.png)
@@ -83,7 +85,7 @@ X, Y = dspp.load_data()
 
 ## Training input data `X`:
 
-*A one-hot encoded amino-acids sequence vector.*
+A one-hot encoded amino acid sequence vector.
 
 As an example, let's consider the amino acid sequence of [NS2B polypeptide from Zika Virus](https://peptone.io/dspp/entry/dSPP26928_0),
 
@@ -114,9 +116,9 @@ _Note: `np.nan` denotes missing experimental assignment data._
 
 # Interactive protein search
 
-For the biology-oriented audience and curious computational scientists we've created a web service at https://peptone.io/dspp.
+For the biology-oriented audience and curious computational scientists, we've created a web service at https://peptone.io/dspp.
 
-Use it to find proteins, explore their propensities and preview all the data in machine-learning ready form.
+Use it to find proteins, explore their propensities and preview all the data in a machine learning-ready form.
 
 # Issues
 
@@ -151,9 +153,9 @@ dSPP - Database of Structural Propensities of Proteins
 
 ### What’s the difference between dSPP and other protein data sets?
 
-1. As opposed to binary (logits) secondary structure assignments available in the most protein datasets, we are in an unique position to report on protein structure and local dynamics. Please [read our paper](http://biorxiv.org/content/early/2017/06/01/144840) to learn more about the benefit of propensity inclusion.
-2. Our experimental data are derived at *native conditions* rendering them absolutely unique for structure and disorder prediction methods that aim to tackle protein folding and stability in biologically relevant contexts.
-3. Our dSPP user interface at https://peptone.io/dspp will give you seamless access to every single protein bundled in `dspp-keras` with all the relevant decision data, and original literature citations.
+1. As opposed to binary (logits) secondary structure assignments available in most protein datasets, we are in a unique position to report on protein structure and local dynamics at the residue level. Please [read our paper](http://biorxiv.org/content/early/2017/06/01/144840) to learn more about the benefit of propensity inclusion.
+2. Our experimental data are derived from *native conditions*, rendering them absolutely unique for structure and disorder prediction methods that aim to tackle protein folding and stability in biologically relevant contexts.
+3. Our dSPP user interface at https://peptone.io/dspp will give you seamless access to every single protein bundled in `dspp-keras` with all the relevant decision data and original literature citations.
 
 ### How did you arrive at structural propensity?
 It is a relatively long subject, far beyond the scope of this short document. Please [read our paper](http://biorxiv.org/content/early/2017/06/01/144840). The exact procedure is described in detail in the *Materials and Methods* together with relevant references.
@@ -180,7 +182,7 @@ Yes. We are actively developing on an expansion of dSPP, which will contain addi
 
 We want to acknowledge Dr. Wenwei Zheng (NIDDK, US), Dr. Ruud Scheek (University of Groningen, NL) and Dr. Xavier Periole (Aarhus University, DK) for insightful comments and editorial suggestions concerning our [dSPP paper](http://biorxiv.org/content/early/2017/06/01/144840).
 
-François Chollet @fchollet [Keras](https://github.com/fchollet/keras) is greatly acknowledged for insightful feedback on database interface and straightforward suggestions concerning Keras integration.
+[François Chollet](https://github.com/fchollet) of [Keras / Google](https://github.com/fchollet/keras) is greatly acknowledged for insightful feedback on database interface and straightforward suggestions concerning Keras integration.
 
 We extend sincere thanks to Alison Lowndes, Carlo Ruiz and Dr. Adam Grzywaczewski, (NVIDIA Corporation) for facilitating collaboration and access to DGX-1 supercomputer.
 
