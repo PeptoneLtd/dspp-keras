@@ -2,6 +2,7 @@ from ..utils.data_utils import get_file
 import numpy as np
 import json
 import tarfile
+import codecs
 
 def load_data(path='peptone_dspp.tar.gz'):
     """Loads the MNIST dataset.
@@ -19,11 +20,12 @@ def load_data(path='peptone_dspp.tar.gz'):
     for member in tar.getmembers():
          f = tar.extractfile(member)
          if f is None: continue
+         content = f.read()
          #print("Load json {}".format(f))
-         database = json.load(f)
+         database = json.loads(content.decode('utf-8'))
          break
 
     X, Y = database['X'], database['Y']
     f.close()
     X, Y = map(lambda element: np.array(list(element)), X), map(lambda element: np.array(element), Y)
-    return X, Y
+    return list(X), list(Y)
