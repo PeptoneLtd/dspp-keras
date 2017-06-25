@@ -104,15 +104,15 @@ np.array([0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
 
 *The structural propensity score tensor.*
 
-Individual, residue-specific scores are bound between `-1.0` and `1.0`. Negative propensity implicates the sampling of **beta-sheet** conformations. A score of `0.0` indicates behaviour found in **disordered** proteins, whereas `1.0` is an indicator of properly folded **alpha-helix**. A score of `0.5` should be understood as a situation when 50% of ensemble members form a helix and the remaining part samples different conformations.
+Individual, residue-specific scores are bound between `1.0` and `3.0`. A propensity of `1.0` implicates the sampling of **beta-sheet** conformations. A score of `2.0` indicates behaviour found in **disordered** proteins, whereas `3.0` is an indicator of properly folded **alpha-helix**. A score of `2.5` should be understood as a situation when 50% of ensemble members form a helix and the remaining part samples different conformations.
 
 The propensity score vector for [NS2B polypeptide from Zika Virus](https://peptone.io/dspp/entry/dSPP26928_0) is given by,
 
 ```python
-np.array([np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, -0.18, -0.30, -0.44, -0.57, -0.72, -0.41, -0.42, -0.23, -0.25, 0.06, -0.30, -0.05, -0.16, 0.17, 0.10, 0.16, 0.14, 0.21, 0.06, 0.06, 0.09, 0.07, np.nan, np.nan, np.nan, 0.02, -0.05, -0.04, -0.06, -0.03, 0.01, 0.06, 0.10, 0.14, 0.17, 0.13, 0.12, 0.05, 0.04, 0.03, -0.00, 0.09, 0.14, 0.16, np.nan, 0.16, 0.16, 0.16, 0.17], dtype=np.float32)
+np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.82, 1.70, 1.56, 1.43, 1.28, 1.59, 1.58, 1.77, 1.75, 2.06, 1.70, 1.95, 1.84, 2.17, 2.10, 2.16, 2.14, 2.21, 2.06, 2.06, 2.09, 2.07, 0.0, 0.0, 0.0, 2.02, 1.95, 1.96, 1.94, 1.97, 2.01, 2.06, 2.10, 2.14, 2.17, 2.13, 2.12, 2.05, 2.04, 2.03, 0.00, 2.09, 2.14, 2.16, 0.0, 2.16, 2.16, 2.16, 2.17], dtype=np.float32)
 ```
 ***
-_Note: `np.nan` denotes missing experimental assignment data._
+_Note: `0.0` denotes missing experimental assignment data._
 
 # Interactive protein search
 
@@ -164,7 +164,7 @@ It is a relatively long subject, far beyond the scope of this short document. Pl
 Currently 7200+. However, the database is on an automatic **14 day** update cycle, hence we expect it to grow.
 
 ### What is the average protein length?
-Currently `110` amino acids. However, the database is on an automatic update cycle, hence this number may change.
+Currently `120` amino acids. However, the database is on an automatic update cycle, hence this number may change.
 
 ### What about experimental conditions relevant to dSPP data?
 The experimental data in dSPP have been collected in solution and solid state NMR experiments. The average experimental temperature is `295K`, pH of `6.9` and ionic strength of `~100mM`. Please [read our paper](http://biorxiv.org/content/early/2017/06/01/144840) to learn more.
